@@ -60,8 +60,8 @@ The library includes a custom `FormattedLogHandler` that you're free to use or c
 
 ```swift
 FormattedLogHandler { options in 
-	// simply return your formatted log
-	FormattedLogHandler(label: label) { data in
+    // simply return your formatted log
+    FormattedLogHandler(label: label) { data in
         "\(data.timestamp()) [\(data.label)] \(data.level.symbol) \(data.message)"
     }
 }
