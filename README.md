@@ -37,6 +37,18 @@ logger.debug("Pi is \(Double(3.14159265359), format: .fixed(precision: 2)")
 // Pi is 3.14
 ```
 
+## Features
+
+The library includes a custom `DebugLogHandler` that you're free to use or create your own. The provided handler uses SFSymbols to improve readability and clarity in the console, as well as a predfined structure for how each log is printed. Obviously you can always use your own `LogHandler` as you can directly with SwiftLog.
+
+The string interpolation additions can mostly be found in the `Message.swift` and `Interpolation.swift` files. 
+
+I've also added many tests to ensure the string interpolation and privacy features are working as expected. However, I have not included any of SwiftLog's tests since the library is simply a _direct copy_ (see below).
+
+## SwiftLog
+
+The actual logging framework is a _direct copy_ of Apple's own SwiftLog. The reason I didn't include it as a dependency is because there was no way for my to _extend_ it to include string interpolation that I could see. If anyone has ideas on how to make this work, I would love to hear about them. Please open an Issue so we can discuss it as this would allow me to properly attribute and pin to a dependency version etc...
+
 ## Installation
 
 The code is packaged as a framework. You can install manually (by copying the files in the `Sources` directory) or using Swift Package Manager (**preferred**)
