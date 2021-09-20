@@ -47,7 +47,7 @@ I've also added many tests to ensure the string interpolation and privacy featur
 
 ## SwiftLog
 
-The actual logging framework is a _direct copy_ of Apple's own SwiftLog. The reason I didn't include it as a dependency is because there was no way for my to _extend_ it to include string interpolation that I could see. If anyone has ideas on how to make this work, I would love to hear about them. Please open an Issue so we can discuss it as this would allow me to properly attribute and pin to a dependency version etc...
+The actual logging framework is a _direct copy_ of Apple's own SwiftLog. The reason I didn't include it as a dependency is because there was no way for me to _extend_ it to include string interpolation that I could see. If anyone has ideas on how to make this work, I would love to hear about them. Please open an Issue so we can discuss it as this would allow me to properly attribute and pin to a dependency version etc...
 
 ## Installation
 
