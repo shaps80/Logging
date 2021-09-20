@@ -7,8 +7,6 @@
 
 A version of Apple's [SwiftLog](https://github.com/apple/swift-log) that adds some improved formatting for app development and includes OSLog-ish string interpolation.
 
-> Note: the performance characteristics of this library should be similar or faster than general `print` statements.
-
 __Feature List__
 
 - [x] ~~Privacy (public, private and masked)~~
