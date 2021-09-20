@@ -5,7 +5,12 @@ import PackageDescription
 
 let package = Package(
     name: "Logging",
-    platforms: [.iOS(.v13)],
+    platforms: [
+        .iOS(.v13),
+        .tvOS(.v13),
+        .macOS(.v10_15),
+        .watchOS(.v6),
+    ],
     products: [
         .library(
             name: "Logging",
