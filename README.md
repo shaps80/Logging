@@ -16,7 +16,7 @@ let logger = Logger(label: "com.benkau.logging")
 logger.debug("Hello, world!")
 ```
 
-Similar to OSLog, all interpolated values default to a `private` scope with their values redacted.
+Similar to OSLog, all interpolated values default to a `private` scope (in a non-DEBUG) environment, with their values redacted.
 
 ```swift
 logger.debug("Logged in as \(user, privacy: .private)")
