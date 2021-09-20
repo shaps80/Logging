@@ -53,6 +53,9 @@ OSLog also provides convenience around printing numerical values, while the enti
 ```swift
 logger.debug("Pi is \(3.14159265359, format: .fixed(precision: 2))")
 // Pi is 3.14
+
+logger.debug("Current score: \(score, format: .decimal(minDigits: 2)")
+// Current score: 03
 ```
 
 ## Formatting
