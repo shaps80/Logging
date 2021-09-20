@@ -26,7 +26,7 @@ __Feature List__
 ```swift
 // Somewhere in your code, define your log handler(s)
 LoggingSystem.bootstrap { label in 
-	FormattedLogHandler(label: label)
+    FormattedLogHandler(label: label)
 }
 
 // Then in a framework or subsystem, define a logger
