@@ -33,7 +33,7 @@ logger.debug("Fetching data from \(url, privacy: .private(.hash))")
 OSLog also provides convenience around printing numerical values, while the entire API is not _yet_ supported (contributions welcome), the most common ones are:
 
 ```swift
-logger.debug("Pi is \(Double(3.14159265359), format: .fixed(precision: 2)")
+logger.debug("Pi is \(3.14159265359, format: .fixed(precision: 2))")
 // Pi is 3.14
 ```
 
