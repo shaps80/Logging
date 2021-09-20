@@ -12,10 +12,12 @@ __Feature List__
 - [x] ~~Privacy (public, private and masked)~~
 - [x] ~~Log levels~~
 - [x] ~~FormattedLogHandler~~
+- [x] ~~Literal string~~
+- [x] ~~Numerical formats~~
 - [x] ~~Boolean formats~~
-- [ ] Column formats
 - [ ] Exponential formats
 - [ ] Hexadecimal formats
+- [ ] Column formatting
 
 > I've also added many tests to ensure the string interpolation and privacy features are working as expected. However, I have not included any of SwiftLog's tests since the library is simply a _direct copy_ (see below).
 
