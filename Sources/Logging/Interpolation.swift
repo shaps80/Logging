@@ -52,55 +52,13 @@ extension LogInterpolation {
 
 extension LogInterpolation {
     /// Defines interpolation for expressions of type Int
-    public mutating func appendInterpolation(_ number: @autoclosure @escaping () -> Int, format: LogIntegerFormatting = .decimal, align: LogStringAlignment = .none, privacy: LogPrivacy = .private) {
+    public mutating func appendInterpolation<T: SignedInteger>(_ number: @autoclosure @escaping () -> T, format: LogIntegerFormatting = .decimal, align: LogStringAlignment = .none, privacy: LogPrivacy = .private) {
         storage.append(.signedInt({ Int64(number()) }, format: format, alignment: align, privacy: privacy))
     }
 
-    /// Defines interpolation for expressions of type Int8
-    public mutating func appendInterpolation(_ number: @autoclosure @escaping () -> Int8, format: LogIntegerFormatting = .decimal, align: LogStringAlignment = .none, privacy: LogPrivacy = .private) {
-        storage.append(.signedInt({ Int64(number()) }, format: format, alignment: align, privacy: privacy))
-    }
-
-    /// Defines interpolation for expressions of type Int16
-    public mutating func appendInterpolation(_ number: @autoclosure @escaping () -> Int16, format: LogIntegerFormatting = .decimal, align: LogStringAlignment = .none, privacy: LogPrivacy = .private) {
-        storage.append(.signedInt({ Int64(number()) }, format: format, alignment: align, privacy: privacy))
-    }
-
-    /// Defines interpolation for expressions of type Int32
-    public mutating func appendInterpolation(_ number: @autoclosure @escaping () -> Int32, format: LogIntegerFormatting = .decimal, align: LogStringAlignment = .none, privacy: LogPrivacy = .private) {
-        storage.append(.signedInt({ Int64(number()) }, format: format, alignment: align, privacy: privacy))
-    }
-
-    /// Defines interpolation for expressions of type Int64
-    public mutating func appendInterpolation(_ number: @autoclosure @escaping () -> Int64, format: LogIntegerFormatting = .decimal, align: LogStringAlignment = .none, privacy: LogPrivacy = .private) {
-        storage.append(.signedInt(number, format: format, alignment: align, privacy: privacy))
-    }
-}
-
-extension LogInterpolation {
     /// Defines interpolation for expressions of type UInt
-    public mutating func appendInterpolation(_ number: @autoclosure @escaping () -> UInt, format: LogIntegerFormatting = .decimal, align: LogStringAlignment = .none, privacy: LogPrivacy = .private) {
+    public mutating func appendInterpolation<T: UnsignedInteger>(_ number: @autoclosure @escaping () -> T, format: LogIntegerFormatting = .decimal, align: LogStringAlignment = .none, privacy: LogPrivacy = .private) {
         storage.append(.unsignedInt({ UInt64(number()) }, format: format, alignment: align, privacy: privacy))
-    }
-
-    /// Defines interpolation for expressions of type UInt8
-    public mutating func appendInterpolation(_ number: @autoclosure @escaping () -> UInt8, format: LogIntegerFormatting = .decimal, align: LogStringAlignment = .none, privacy: LogPrivacy = .private) {
-        storage.append(.unsignedInt({ UInt64(number()) }, format: format, alignment: align, privacy: privacy))
-    }
-
-    /// Defines interpolation for expressions of type UInt16
-    public mutating func appendInterpolation(_ number: @autoclosure @escaping () -> UInt16, format: LogIntegerFormatting = .decimal, align: LogStringAlignment = .none, privacy: LogPrivacy = .private) {
-        storage.append(.unsignedInt({ UInt64(number()) }, format: format, alignment: align, privacy: privacy))
-    }
-
-    /// Defines interpolation for expressions of type UInt32
-    public mutating func appendInterpolation(_ number: @autoclosure @escaping () -> UInt32, format: LogIntegerFormatting = .decimal, align: LogStringAlignment = .none, privacy: LogPrivacy = .private) {
-        storage.append(.unsignedInt({ UInt64(number()) }, format: format, alignment: align, privacy: privacy))
-    }
-
-    /// Defines interpolation for expressions of type UInt64
-    public mutating func appendInterpolation(_ number: @autoclosure @escaping () -> UInt64, format: LogIntegerFormatting = .decimal, align: LogStringAlignment = .none, privacy: LogPrivacy = .private) {
-        storage.append(.unsignedInt(number, format: format, alignment: align, privacy: privacy))
     }
 }
 

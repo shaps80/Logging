@@ -33,27 +33,27 @@ extension Logger {
                     switch format.format {
                     case let .fixed(precision, explicitPositiveSign):
                         let value = value()
-                        let string = String(format: "%\(explicitPositiveSign ? "+" : "").0\(precision())f", value)
+                        let string = String(format: "\(explicitPositiveSign ? "+" : "")%.0\(precision())f", value)
                         message.append(privacy.value(for: string))
                     }
                 case let .float(value, format, _, privacy):
                     switch format.format {
                     case let .fixed(precision, explicitPositiveSign):
                         let value = value()
-                        let string = String(format: "%\(explicitPositiveSign ? "+" : "").0\(precision())f", value)
+                        let string = String(format: "\(explicitPositiveSign ? "+" : "")%.0\(precision())f", value)
                         message.append(privacy.value(for: string))
                     }
                 case let .signedInt(value, format, _, privacy):
                     switch format.format {
                     case let .decimal(minDigits, explicitPositiveSign):
                         let value = value()
-                        let string = String(format: "%\(explicitPositiveSign ? "+" : "")%0\(minDigits())d", value)
+                        let string = String(format: "\(explicitPositiveSign ? "+" : "")%0\(minDigits())ld", value)
                         message.append(privacy.value(for: string))
                     }
                 case let .unsignedInt(value, format, _, privacy):
                     switch format.format {
                     case let .decimal(minDigits, explicitPositiveSign):
-                        let value = String(format: "%\(explicitPositiveSign ? "+" : "")%0\(minDigits())d", value())
+                        let value = String(format: "\(explicitPositiveSign ? "+" : "")%0\(minDigits())lu", value())
                         message.append(privacy.value(for: value))
                     }
                 case let .meta(value, _, privacy):

@@ -9,9 +9,25 @@ A version of Apple's [SwiftLog](https://github.com/apple/swift-log) that adds so
 
 > Note: the performance characteristics of this library should be similar or faster than general `print` statements.
 
+__Feature List__
+
+- [x] ~~Privacy (public, private and masked)~~
+- [x] ~~Log levels~~
+- [x] ~~FormattedLogHandler~~
+- [x] ~~Boolean formats~~
+- [ ] Column formats
+- [ ] Exponential formats
+- [ ] Hexadecimal formats
+
 ## Example
 
 ```swift
+// Somewhere in your code, define your log handler(s)
+LoggingSystem.bootstrap { label in 
+	FormattedLogHandler(label: label)
+}
+
+// Then in a framework or subsystem, define a logger
 let logger = Logger(label: "com.benkau.logging")
 logger.debug("Hello, world!")
 ```
@@ -37,9 +53,22 @@ logger.debug("Pi is \(3.14159265359, format: .fixed(precision: 2))")
 // Pi is 3.14
 ```
 
+
+
 ## Features
 
-The library includes a custom `DebugLogHandler` that you're free to use or create your own. The provided handler uses SFSymbols to improve readability and clarity in the console, as well as a predfined structure for how each log is printed. Obviously you can always use your own `LogHandler` as you can directly with SwiftLog.
+The library includes a custom `FormattedLogHandler` that you're free to use or create your own. The provided handler uses SFSymbols to improve readability and clarity in the console, as well as providing a simple closure based formatter so you can make it your own.
+
+```swift
+FormattedLogHandler { options in 
+	// simply return your formatted log
+	FormattedLogHandler(label: label) { data in
+        "\(data.timestamp()) [\(data.label)] \(data.level.symbol) \(data.message)"
+    }
+}
+```
+
+> Obviously you can always use your own `LogHandler` as you can directly with SwiftLog.
 
 The string interpolation additions can mostly be found in the `Message.swift` and `Interpolation.swift` files. 
 

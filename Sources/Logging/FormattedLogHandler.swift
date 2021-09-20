@@ -1,18 +1,43 @@
 import Foundation
 
-public struct DebugLogHandler: LogHandler {
+/// A formatted log handler that allows user-configuration
+public struct FormattedLogHandler: LogHandler {
 
-    public struct Options {
+    /// All associated data for a specific log event
+    public struct Data {
+        /// The log level for this event
         public var level: Logger.Level
+        /// The label associated with this event
+        public var label: String
+        /// The message for this event, use `message.description` to get a string interpretation
         public var message: Logger.Message
+        /// The metadata associated with this event
         public var metadata: Logger.Metadata
+        /// The source of this event
         public var source: String
+        /// The file where this event was logged
         public var file: String
+        /// The function where this event was logged
         public var function: String
+        /// The line of code where this event was logged
         public var line: UInt
+
+        /// Returns an timestamp using the specified format, defaults to `%Y-%m-%d %H:%M:%S`
+        /// - Parameter format: The format to return, defaults to `%Y-%m-%d %H:%M:%S` (Example: 2021-10-10 11:22:33)
+        public func timestamp(format: String = "%Y-%m-%d %H:%M:%S") -> String {
+            var buffer = [Int8](repeating: 0, count: 255)
+            var timestamp = time(nil)
+            let localTime = localtime(&timestamp)
+            strftime(&buffer, buffer.count, format, localTime)
+            return buffer.withUnsafeBufferPointer {
+                $0.withMemoryRebound(to: CChar.self) {
+                    String(cString: $0.baseAddress!)
+                }
+            }
+        }
     }
 
-    public typealias Formatter = (Options) -> String
+    public typealias Formatter = (Data) -> String
 
     public static let defaultFormat: Formatter = {
         var message = $0.message.description
@@ -21,13 +46,13 @@ public struct DebugLogHandler: LogHandler {
         }
 
         #if DEBUG
-        return "\($0.level.formatted) \(message)"
+        return "\($0.timestamp()) [\($0.label)] \($0.level.symbol) \(message)"
         #else
         let filename = URL(fileURLWithPath: $0.file)
             .deletingPathExtension()
             .lastPathComponent
 
-        return "\($0.level.formatted) \(message) | \(filename), \($0.line)"
+        return "\($0.timestamp()) [\($0.label)] \($0.level.symbol) \(message) | \(filename), \($0.line)"
         #endif
     }
 
@@ -41,10 +66,19 @@ public struct DebugLogHandler: LogHandler {
         set { metadata[metadataKey] = newValue }
     }
 
+    /// A log handler with the specified label and minimum log level
+    /// - Parameters:
+    ///   - label: The associated label for this logger
+    ///   - logLevel: The minimum log level to include
     public init(label: String, logLevel: Logger.Level = .trace) {
         self.init(label: label, logLevel: logLevel, formatter: Self.defaultFormat)
     }
 
+    /// A log handler with the specified label, minimum log level and associated formatter
+    /// - Parameters:
+    ///   - label: The associated label for this logger
+    ///   - logLevel: The minimum log level to include
+    ///   - formatter: The formatter to use for formatting log data
     public init(label: String, logLevel: Logger.Level = .trace, formatter: @escaping Formatter) {
         self.label = label
         self.formatter = formatter
@@ -58,8 +92,9 @@ public struct DebugLogHandler: LogHandler {
             meta.merge(additional) { $1 }
         }
 
-        let options = Options(
+        let options = Data(
             level: level,
+            label: label,
             message: message,
             metadata: meta,
             source: source,
@@ -68,19 +103,7 @@ public struct DebugLogHandler: LogHandler {
             line: line
         )
 
-        print("\(timestamp()) [\(label)] \(formatter(options))")
-    }
-
-    private func timestamp() -> String {
-        var buffer = [Int8](repeating: 0, count: 255)
-        var timestamp = time(nil)
-        let localTime = localtime(&timestamp)
-        strftime(&buffer, buffer.count, "%Y-%m-%d %H:%M:%S", localTime)
-        return buffer.withUnsafeBufferPointer {
-            $0.withMemoryRebound(to: CChar.self) {
-                String(cString: $0.baseAddress!)
-            }
-        }
+        print(formatter(options))
     }
 
 }
@@ -93,8 +116,8 @@ private extension Logger.Metadata {
     }
 }
 
-private extension Logger.Level {
-    var formatted: String {
+public extension Logger.Level {
+    var symbol: String {
         switch self {
         case .trace:    return "􀁼"
         case .debug:    return "􀍷"
