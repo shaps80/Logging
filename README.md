@@ -19,7 +19,9 @@ __Feature List__
 - [ ] Exponential formats
 - [ ] Hexadecimal formats
 
-## Example
+> I've also added many tests to ensure the string interpolation and privacy features are working as expected. However, I have not included any of SwiftLog's tests since the library is simply a _direct copy_ (see below).
+
+## Examples
 
 ```swift
 // Somewhere in your code, define your log handler(s)
@@ -53,9 +55,7 @@ logger.debug("Pi is \(3.14159265359, format: .fixed(precision: 2))")
 // Pi is 3.14
 ```
 
-
-
-## Features
+## Formatting
 
 The library includes a custom `FormattedLogHandler` that you're free to use or create your own. The provided handler uses SFSymbols to improve readability and clarity in the console, as well as providing a simple closure based formatter so you can make it your own.
 
@@ -69,10 +69,6 @@ FormattedLogHandler { options in
 ```
 
 > Obviously you can always use your own `LogHandler` as you can directly with SwiftLog.
-
-The string interpolation additions can mostly be found in the `Message.swift` and `Interpolation.swift` files. 
-
-I've also added many tests to ensure the string interpolation and privacy features are working as expected. However, I have not included any of SwiftLog's tests since the library is simply a _direct copy_ (see below).
 
 ## SwiftLog
 

@@ -22,5 +22,5 @@ final class FloatTests: XCTestCase {
         logger.debug("\(value, format: .fixed(precision: 2), privacy: .public)")
         XCTAssertEqual(logging.recorder.message, "3.14")
     }
-    
+
 }
