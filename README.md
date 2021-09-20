@@ -39,11 +39,7 @@ Similar to OSLog, all interpolated values default to a `private` scope (in a non
 ```swift
 logger.debug("Logged in as \(user, privacy: .private)")
 // Logged in as <redacted>
-```
 
-In addition to allow for simplied lookup of like-values, we can use another OSLog API:
-
-```swift
 logger.debug("Fetching data from \(url, privacy: .private(.hash))")
 // Fetching data from 210237823
 ```
