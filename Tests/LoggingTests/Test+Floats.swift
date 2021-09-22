@@ -19,7 +19,11 @@ final class FloatTests: XCTestCase {
         logger.debug("\(max, privacy: .public)")
         XCTAssertEqual(logging.recorder.message, "\(CGFloat.greatestFiniteMagnitude)")
 
+        #if swift(<5.5)
+        logger.debug("\(Float(value), format: .fixed(precision: 2), privacy: .public)")
+        #else
         logger.debug("\(value, format: .fixed(precision: 2), privacy: .public)")
+        #endif
         XCTAssertEqual(logging.recorder.message, "3.14")
     }
 
