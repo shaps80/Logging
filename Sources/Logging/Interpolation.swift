@@ -9,6 +9,7 @@ import Foundation
         case signedInt(() -> Int64, format: LogIntegerFormatting, alignment: LogStringAlignment, privacy: LogPrivacy)
         case unsignedInt(() -> UInt64, format: LogIntegerFormatting, alignment: LogStringAlignment, privacy: LogPrivacy)
         case float(() -> Float, format: LogFloatFormatting, alignment: LogStringAlignment, privacy: LogPrivacy)
+		case cgfloat(() -> CGFloat, format: LogFloatFormatting, alignment: LogStringAlignment, privacy: LogPrivacy)
         case double(() -> Double, format: LogFloatFormatting, alignment: LogStringAlignment, privacy: LogPrivacy)
         case bool(() -> Bool, format: LogBoolFormat, privacy: LogPrivacy)
         case object(() -> NSObject, privacy: LogPrivacy)
@@ -67,6 +68,11 @@ extension LogInterpolation {
     public mutating func appendInterpolation(_ number: @autoclosure @escaping () -> Float, format: LogFloatFormatting = .fixed, align: LogStringAlignment = .none, privacy: LogPrivacy = .private) {
         storage.append(.float(number, format: format, alignment: align, privacy: privacy))
     }
+
+	/// Defines interpolation for expressions of type CGFloat
+	public mutating func appendInterpolation(_ number: @autoclosure @escaping () -> CGFloat, format: LogFloatFormatting = .fixed, align: LogStringAlignment = .none, privacy: LogPrivacy = .private) {
+		storage.append(.cgfloat(number, format: format, alignment: align, privacy: privacy))
+	}
 
     /// Defines interpolation for expressions of type Double
     public mutating func appendInterpolation(_ number: @autoclosure @escaping () -> Double, format: LogFloatFormatting = .fixed, align: LogStringAlignment = .none, privacy: LogPrivacy = .private) {
