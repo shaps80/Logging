@@ -17,7 +17,7 @@ final class FloatTests: XCTestCase {
         XCTAssertEqual(logging.recorder.message, String(format: "%.06f", CGFloat.leastNonzeroMagnitude))
 
         logger.debug("\(max, privacy: .public)")
-		XCTAssertEqual(logging.recorder.message, String(format: "%.06f", CGFloat.greatestFiniteMagnitude))
+        XCTAssertEqual(logging.recorder.message, String(format: "%.06f", CGFloat.greatestFiniteMagnitude))
 
         logger.debug("\(value, format: .fixed(precision: 2), privacy: .public)")
         XCTAssertEqual(logging.recorder.message, "3.14")
