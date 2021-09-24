@@ -5,8 +5,9 @@ final class PrivateTests: XCTestCase {
 
     func testPrivate() {
         #if DEBUG
-        XCTFail("\n\n   *** Tests for Redaction must be run in release build.  Use `swift test -c release` from the command line.\n")
-        #endif
+        print("\n\n   *** Tests for Redaction skipped! ***  ")
+        print("           They require release build; use `swift test -c release` from command line.\n")
+        #else
         
         let signed = -3.14159265359
         let unsigned = 3.14
@@ -61,6 +62,7 @@ final class PrivateTests: XCTestCase {
         XCTAssertEqual(logging.recorder.message, LogPrivacy.redacted)
         logger.debug("\(UInt(unsigned), format: .decimal(explicitPositiveSign: true, minDigits: 0))")
         XCTAssertEqual(logging.recorder.message, LogPrivacy.redacted)
+        #endif
     }
 
 }
