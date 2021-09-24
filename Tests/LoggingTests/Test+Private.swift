@@ -4,6 +4,10 @@ import XCTest
 final class PrivateTests: XCTestCase {
 
     func testPrivate() {
+        #if DEBUG
+        XCTFail("\n\n   *** Tests for Redaction must be run in release build.  Use `swift test -c release` from the command line.\n")
+        #endif
+        
         let signed = -3.14159265359
         let unsigned = 3.14
         let logging = TestLogging()
