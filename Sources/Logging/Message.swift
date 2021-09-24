@@ -43,6 +43,13 @@ extension Logger {
                         let string = String(format: "\(explicitPositiveSign ? "+" : "")%.0\(precision())f", value)
                         message.append(privacy.value(for: string))
                     }
+                case let .cgfloat(value, format, _, privacy):
+                    switch format.format {
+                    case let .fixed(precision, explicitPositiveSign):
+                        let value = value()
+                        let string = String(format: "\(explicitPositiveSign ? "+" : "")%.0\(precision())f", value)
+                        message.append(privacy.value(for: string))
+                    }
                 case let .signedInt(value, format, _, privacy):
                     switch format.format {
                     case let .decimal(minDigits, explicitPositiveSign):

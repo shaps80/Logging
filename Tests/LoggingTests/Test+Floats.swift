@@ -14,10 +14,10 @@ final class FloatTests: XCTestCase {
         logger.logLevel = .trace
 
         logger.debug("\(min, privacy: .public)")
-        XCTAssertEqual(logging.recorder.message, "\(CGFloat.leastNonzeroMagnitude)")
+        XCTAssertEqual(logging.recorder.message, String(format: "%.06f", CGFloat.leastNonzeroMagnitude))
 
         logger.debug("\(max, privacy: .public)")
-        XCTAssertEqual(logging.recorder.message, "\(CGFloat.greatestFiniteMagnitude)")
+        XCTAssertEqual(logging.recorder.message, String(format: "%.06f", CGFloat.greatestFiniteMagnitude))
 
         logger.debug("\(value, format: .fixed(precision: 2), privacy: .public)")
         XCTAssertEqual(logging.recorder.message, "3.14")
