@@ -1,4 +1,4 @@
-import Foundation
+import CoreGraphics
 
 @frozen public struct LogInterpolation: StringInterpolationProtocol {
 
