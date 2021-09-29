@@ -18,12 +18,7 @@ let package = Package(
         ),
     ],
     targets: [
-        .target(
-            name: "Logging",
-            swiftSettings: [
-                .unsafeFlags(["-enable-testing"])
-            ]
-        ),
+        .target(name: "Logging"),
         .testTarget(
             name: "LoggingTests",
             dependencies: ["Logging"]
