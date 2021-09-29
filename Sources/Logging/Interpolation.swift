@@ -183,8 +183,8 @@ public struct LogIntegerFormatting {
 
     internal static let redacted = "<redacted>"
     internal func value(for value: Any) -> String {
-        #if DEBUGGING
-        if disableRedaction {
+        #if DEBUG
+        if LogPrivacy.disableRedaction {
             return String(describing: value)
         }
         #endif
