@@ -6,6 +6,9 @@ final class PrivateTests: XCTestCase {
     func testPrivate() {
         let signed = -3.14159265359
         let unsigned = 3.14
+        #if DEBUG
+        LogPrivacy.disableRedaction = false
+        #endif
         let logging = TestLogging()
         LoggingSystem.bootstrapInternal(logging.make)
 
