@@ -177,11 +177,17 @@ public struct LogIntegerFormatting {
         LogPrivacy(isPrivate: true, mask: mask)
     }
 
+    #if DEBUG
+    internal static var disableRedaction: Bool = true
+    #endif
+
     internal static let redacted = "<redacted>"
     internal func value(for value: Any) -> String {
         #if DEBUG
-        return String(describing: value)
-        #else
+        if LogPrivacy.disableRedaction {
+            return String(describing: value)
+        }
+        #endif
 
         switch self {
         case .public:
@@ -191,6 +197,5 @@ public struct LogIntegerFormatting {
         default:
             return Self.redacted
         }
-        #endif
     }
 }
