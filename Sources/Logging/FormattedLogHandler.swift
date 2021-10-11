@@ -52,7 +52,7 @@ public struct FormattedLogHandler: LogHandler {
             .deletingPathExtension()
             .lastPathComponent
 
-        return "\($0.timestamp()) [\($0.label)] \($0.level.symbol) \(message) | \(filename), \($0.line)"
+        return "\($0.timestamp()) \($0.level.symbol) [\($0.label)] \(message) | \(filename), \($0.line)"
         #endif
     }
 
