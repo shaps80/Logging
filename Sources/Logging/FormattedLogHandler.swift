@@ -46,7 +46,7 @@ public struct FormattedLogHandler: LogHandler {
         }
 
         #if DEBUG
-        return "\($0.timestamp()) [\($0.label)] \($0.level.symbol) \(message)"
+        return "\($0.timestamp()) \($0.level.symbol) [\($0.label)] \(message)"
         #else
         let filename = URL(fileURLWithPath: $0.file)
             .deletingPathExtension()
