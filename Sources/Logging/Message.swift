@@ -1,7 +1,7 @@
 import Foundation
 
 extension Logger {
-    public struct Message: ExpressibleByStringInterpolation, ExpressibleByStringLiteral, CustomStringConvertible {
+    public struct Message: ExpressibleByStringInterpolation, ExpressibleByStringLiteral, CustomStringConvertible, Sendable {
         public var interpolation: LogInterpolation
 
         public init(stringLiteral value: String) {
