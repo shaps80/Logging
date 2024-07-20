@@ -43,6 +43,7 @@ extension Logger {
                         let string = String(format: "\(explicitPositiveSign ? "+" : "")%.0\(precision())f", value)
                         message.append(privacy.value(for: string))
                     }
+#if canImport(CoreGraphics)
                 case let .cgfloat(value, format, _, privacy):
                     switch format.format {
                     case let .fixed(precision, explicitPositiveSign):
@@ -50,6 +51,7 @@ extension Logger {
                         let string = String(format: "\(explicitPositiveSign ? "+" : "")%.0\(precision())f", value)
                         message.append(privacy.value(for: string))
                     }
+#endif
                 case let .signedInt(value, format, _, privacy):
                     switch format.format {
                     case let .decimal(minDigits, explicitPositiveSign):

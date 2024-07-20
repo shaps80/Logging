@@ -3,6 +3,7 @@ import XCTest
 
 final class FloatTests: XCTestCase {
 
+#if canImport(CoreGraphics)
     func testCGFloats() {
         let min: CGFloat = .leastNonzeroMagnitude
         let max: CGFloat = .greatestFiniteMagnitude
@@ -22,6 +23,7 @@ final class FloatTests: XCTestCase {
         logger.debug("\(value, format: .fixed(precision: 2), privacy: .public)")
         XCTAssertEqual(logging.recorder.message, "3.14")
     }
+#endif
 
     func testFloats() {
         let min: Float = .leastNonzeroMagnitude

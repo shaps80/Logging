@@ -1,4 +1,8 @@
+import Foundation
+
+#if canImport(CoreGraphics)
 import CoreGraphics
+#endif
 
 @frozen public struct LogInterpolation: StringInterpolationProtocol, Sendable {
 
@@ -9,7 +13,9 @@ import CoreGraphics
         case signedInt(@Sendable () -> Int64, format: LogIntegerFormatting, alignment: LogStringAlignment, privacy: LogPrivacy)
         case unsignedInt(@Sendable () -> UInt64, format: LogIntegerFormatting, alignment: LogStringAlignment, privacy: LogPrivacy)
         case float(@Sendable () -> Float, format: LogFloatFormatting, alignment: LogStringAlignment, privacy: LogPrivacy)
+        #if canImport(CoreGraphics)
         case cgfloat(@Sendable () -> CGFloat, format: LogFloatFormatting, alignment: LogStringAlignment, privacy: LogPrivacy)
+        #endif
         case double(@Sendable () -> Double, format: LogFloatFormatting, alignment: LogStringAlignment, privacy: LogPrivacy)
         case bool(@Sendable () -> Bool, format: LogBoolFormat, privacy: LogPrivacy)
         case object(@Sendable () -> NSObject, privacy: LogPrivacy)
@@ -69,10 +75,12 @@ extension LogInterpolation {
         storage.append(.float(number, format: format, alignment: align, privacy: privacy))
     }
 
+#if canImport(CoreGraphics)
     /// Defines interpolation for expressions of type CGFloat
     public mutating func appendInterpolation(_ number: @Sendable @autoclosure @escaping () -> CGFloat, format: LogFloatFormatting = .fixed, align: LogStringAlignment = .none, privacy: LogPrivacy = .private) {
         storage.append(.cgfloat(number, format: format, alignment: align, privacy: privacy))
     }
+#endif
 
     /// Defines interpolation for expressions of type Double
     public mutating func appendInterpolation(_ number: @Sendable @autoclosure @escaping () -> Double, format: LogFloatFormatting = .fixed, align: LogStringAlignment = .none, privacy: LogPrivacy = .private) {

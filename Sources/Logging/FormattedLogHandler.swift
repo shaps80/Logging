@@ -27,8 +27,9 @@ public struct FormattedLogHandler: LogHandler {
         public func timestamp(format: String = "%Y-%m-%d %H:%M:%S") -> String {
             var buffer = [Int8](repeating: 0, count: 255)
             var timestamp = time(nil)
-            let localTime = localtime(&timestamp)
-            strftime(&buffer, buffer.count, format, localTime)
+            var localTime = tm()
+            localtime_s(&localTime, &timestamp)
+            strftime(&buffer, buffer.count, format, &localTime)
             return buffer.withUnsafeBufferPointer {
                 $0.withMemoryRebound(to: CChar.self) {
                     String(cString: $0.baseAddress!)
